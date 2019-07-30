@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.io.IOException;
+
 public class LoginEncapsulate {
 
     public WebDriver driver;
@@ -20,12 +22,12 @@ public class LoginEncapsulate {
     }
 
 
-    public void loginScript() throws InterruptedException {
+    public void loginScript() throws InterruptedException, IOException {
         this.InitDriver();
 
         String username = "ivanzhong0310@gmail.com";
-        String emailElement = "email";
-        String userBy = "id";
+        //String emailElement = "email";
+        //String userBy = "id";
         String userpass = "aaaaaaaa";
         String passBy = "name";
         String passwordElement = "password";
@@ -36,11 +38,20 @@ public class LoginEncapsulate {
 
 
 
+        PropUtil propUtil = new PropUtil("element.properties");
+        String locator = propUtil.getProperties("username");
+        String locatorType = locator.split(">")[0];
+        String locatorValue = locator.split(">")[1];
+
+
+
+
+
         Thread.sleep(3000);
 
         //WebElement user = driver.findElement(By.name(emailElement));
         //WebElement user = driver.findElement(this.byStr(userBy,emailElement));
-        WebElement user = this.element(this.byStr(userBy,emailElement));
+        WebElement user = this.element(this.byStr(locatorType,locatorValue));
 
         user.isDisplayed();
         //WebElement password = driver.findElement(By.name(passwordElement));
@@ -112,7 +123,7 @@ public class LoginEncapsulate {
         return ele;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         LoginEncapsulate login = new LoginEncapsulate();
         //login.InitDriver();
         login.loginScript();
