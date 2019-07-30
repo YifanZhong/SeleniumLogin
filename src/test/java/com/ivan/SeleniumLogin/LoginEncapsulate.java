@@ -39,14 +39,19 @@ public class LoginEncapsulate {
         Thread.sleep(3000);
 
         //WebElement user = driver.findElement(By.name(emailElement));
-        WebElement user = driver.findElement(this.byStr(userBy,emailElement));
+        //WebElement user = driver.findElement(this.byStr(userBy,emailElement));
+        WebElement user = this.element(this.byStr(userBy,emailElement));
 
         user.isDisplayed();
         //WebElement password = driver.findElement(By.name(passwordElement));
-        WebElement password = driver.findElement(this.byStr(passBy,passwordElement));
+        //WebElement password = driver.findElement(this.byStr(passBy,passwordElement));
+        WebElement password = this.element(this.byStr(passBy,passwordElement));
+
         password.isDisplayed();
         //WebElement loginButton = driver.findElement(By.className(buttonElement));
-        WebElement loginButton = driver.findElement(this.byStr(buttonBy,buttonElement));
+        //WebElement loginButton = driver.findElement(this.byStr(buttonBy,buttonElement));
+        WebElement loginButton = this.element(this.byStr(buttonBy,buttonElement));
+
         loginButton.isDisplayed();
 
         user.sendKeys(username);
@@ -56,7 +61,11 @@ public class LoginEncapsulate {
         Thread.sleep(3000);
 
         //driver.findElement(By.id("header-avator")).isDisplayed();
-        WebElement header = driver.findElement(By.id(headerElement));
+        //WebElement header = driver.findElement(By.id(headerElement));
+
+        //TODO
+        WebElement header = this.element(By.id(headerElement));
+
         header.isDisplayed();
 
 
@@ -65,7 +74,11 @@ public class LoginEncapsulate {
 
 
         //driver.findElement(By.id("name")).isDisplayed();
-        String userInfo = driver.findElement(By.className(nameElement)).getText();
+        //String userInfo = driver.findElement(By.className(nameElement)).getText();
+
+        //TODO
+        String userInfo = this.element(By.className(nameElement)).getText();
+
         //System.out.println(userInfo);
         if (userInfo.equals("xxxxxxx")){
             System.out.println("login success");
@@ -87,6 +100,16 @@ public class LoginEncapsulate {
             return By.xpath(local);
         }
 
+    }
+
+    /**
+     * 封装findElement
+     * @param by
+     * @return
+     */
+    public WebElement element(By by){
+        WebElement ele = driver.findElement(by);
+        return ele;
     }
 
     public static void main(String[] args) throws InterruptedException {
